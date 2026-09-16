@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Productdata } from '../../services/productdata';
@@ -21,14 +21,13 @@ export class UpdateProduct implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private proddata: Productdata
+    private proddata: Productdata,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.objid = this.route.snapshot.paramMap.get('id') ?? '';
 
-    // grab the full list and find the one matching this _id
-    // (simplest approach given our server only has a getlist route)
     this.proddata.getlist().subscribe((products) => {
       const found = products.find((p: any) => p._id === this.objid);
       if (found) {
@@ -37,6 +36,7 @@ export class UpdateProduct implements OnInit {
         this.productdesc = found.description;
         this.productprice = found.price;
         this.productunits = found.units;
+        this.cdr.markForCheck();
       }
     });
   }

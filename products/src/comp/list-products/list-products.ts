@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Productdata } from '../../services/productdata';
 import { Product } from '../../models/product';
@@ -10,20 +10,20 @@ import { Product } from '../../models/product';
   styleUrl: './list-products.css'
 })
 export class ListProducts implements OnInit {
-  products: Product[] = [];
+  products = signal<Product[]>([]);
 
   constructor(private proddata: Productdata) {}
 
   ngOnInit() {
     this.proddata.getlist().subscribe((data) => {
-      this.products = data;
+      this.products.set(data);
     });
   }
 
   deleteproduct(id: string) {
     if (confirm('Are you sure you want to delete this item')) {
       this.proddata.deleteitem(id).subscribe((data) => {
-        this.products = data;
+        this.products.set(data);
       });
     }
   }

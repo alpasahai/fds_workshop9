@@ -27,8 +27,8 @@
     <button type="submit" class="btn btn-primary mt-2">Add New</button>
   </form>
 
-  @if (message) {
-    <div class="alert alert-warning mt-3">{{ message }}</div>
+  @if (message() ) {
+    <div class="alert alert-warning mt-3">{{ message() }}</div>
   }
 </div>
 

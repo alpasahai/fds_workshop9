@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Productdata } from '../../services/productdata';
 
 @Component({
@@ -8,13 +8,13 @@ import { Productdata } from '../../services/productdata';
   styleUrl: './home.css'
 })
 export class Home implements OnInit {
-  count = 0;
+  count = signal(0);
 
   constructor(private proddata: Productdata) {}
 
   ngOnInit() {
     this.proddata.getprodcount().subscribe((data) => {
-      this.count = data.count;
+      this.count.set(data.count);
     });
   }
 }

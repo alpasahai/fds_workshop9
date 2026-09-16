@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Productdata } from '../../services/productdata';
@@ -17,7 +17,7 @@ export class AddProduct {
   productprice: number | null = null;
   producttype = '';
   productunits: number | null = null;
-  message = '';
+  message = signal('');
 
   constructor(private proddata: Productdata, private router: Router) {}
 
@@ -33,14 +33,14 @@ export class AddProduct {
 
     this.proddata.add(newProduct).subscribe((data) => {
       if (data.err == null) {
-        this.message = data.num + ' new product (' + this.productname + ') was added';
+        this.message.set(data.num + ' new product (' + this.productname + ') was added');
         this.productid = null;
         this.productname = '';
         this.productdesc = '';
         this.productprice = null;
         this.productunits = null;
       } else {
-        this.message = data.err;
+        this.message.set(data.err);
       }
     });
   }
