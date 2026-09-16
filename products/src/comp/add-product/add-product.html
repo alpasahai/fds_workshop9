@@ -1,1 +1,34 @@
-<p>add-product works!</p>
+<div class="container">
+  <form (ngSubmit)="addnewProduct()">
+    <div class="form-group">
+      <label for="productid">Product ID</label>
+      <input type="number" class="form-control" id="productid" [(ngModel)]="productid" name="productid">
+    </div>
+    <div class="form-group">
+      <label for="productname">Product Name</label>
+      <input type="text" class="form-control" id="productname" [(ngModel)]="productname" name="productname">
+    </div>
+    <div class="form-group">
+      <label for="productdesc">Description</label>
+      <textarea class="form-control" id="productdesc" [(ngModel)]="productdesc" name="productdesc"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="productprice">Price</label>
+      <input type="number" class="form-control" id="productprice" [(ngModel)]="productprice" name="productprice">
+    </div>
+    <div class="form-group">
+      <label for="producttype">Type</label>
+      <input type="text" class="form-control" id="producttype" [(ngModel)]="producttype" name="producttype">
+    </div>
+    <div class="form-group">
+      <label for="productunits">Units</label>
+      <input type="number" class="form-control" id="productunits" [(ngModel)]="productunits" name="productunits">
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Add New</button>
+  </form>
+
+  @if (message) {
+    <div class="alert alert-warning mt-3">{{ message }}</div>
+  }
+</div>
+

@@ -1,1 +1,26 @@
-<p>list-products works!</p>
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Units</th>
+      <th></th>
+    </tr>
+    @for (product of products; track product._id) {
+      <tr>
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.units }}</td>
+        <td>
+          <a class="btn btn-primary btn-sm" [routerLink]="['/update', product._id]">Edit</a>
+          <button class="btn btn-danger btn-sm" (click)="deleteproduct(product._id!)">Delete</button>
+        </td>
+      </tr>
+    }
+  </table>
+</div>
+

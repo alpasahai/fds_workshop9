@@ -1,9 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Productdata } from '../../services/productdata';
 
 @Component({
-  imports: [],
   selector: 'app-home',
-  styleUrl: './home.css',
+  imports: [],
   templateUrl: './home.html',
+  styleUrl: './home.css'
 })
-export class Home {}
+export class Home implements OnInit {
+  count = 0;
+
+  constructor(private proddata: Productdata) {}
+
+  ngOnInit() {
+    this.proddata.getprodcount().subscribe((data) => {
+      this.count = data.count;
+    });
+  }
+}

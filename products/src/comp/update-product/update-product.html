@@ -1,1 +1,25 @@
-<p>update-product works!</p>
+<div class="container">
+  <form (ngSubmit)="updateProduct()">
+    <div class="form-group">
+      <label>Product ID</label>
+      <input type="number" class="form-control" [value]="productid" disabled>
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="productname" name="name">
+    </div>
+    <div class="form-group">
+      <label for="desc">Description</label>
+      <textarea class="form-control" id="desc" [(ngModel)]="productdesc" name="desc"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" class="form-control" id="price" [(ngModel)]="productprice" name="price">
+    </div>
+    <div class="form-group">
+      <label for="units">Units</label>
+      <input type="number" class="form-control" id="units" [(ngModel)]="productunits" name="units">
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Update</button>
+  </form>
+</div>

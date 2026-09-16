@@ -1,9 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Productdata } from '../../services/productdata';
+import { Product } from '../../models/product';
 
 @Component({
-  imports: [],
   selector: 'app-list-products',
-  styleUrl: './list-products.css',
+  imports: [RouterLink],
   templateUrl: './list-products.html',
+  styleUrl: './list-products.css'
 })
-export class ListProducts {}
+export class ListProducts implements OnInit {
+  products: Product[] = [];
+
+  constructor(private proddata: Productdata) {}
+
+  ngOnInit() {
+    this.proddata.getlist().subscribe((data) => {
+      this.products = data;
+    });
+  }
+
+  deleteproduct(id: string) {
+    if (confirm('Are you sure you want to delete this item')) {
+      this.proddata.deleteitem(id).subscribe((data) => {
+        this.products = data;
+      });
+    }
+  }
+}
